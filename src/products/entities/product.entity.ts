@@ -19,14 +19,10 @@ export class ProductEntity implements Product {
 
   @ApiProperty()
   available: boolean;
+
+  @ApiProperty()
+  featured: boolean;
+
+  @ApiProperty()
+  top: boolean;
 }
-
-/*
-
-description String?
-  price       Float
-  image       String
-  available     Boolean  @default(true)
-  */
-
-//export class Product {}

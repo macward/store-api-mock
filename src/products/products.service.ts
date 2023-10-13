@@ -3,22 +3,39 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
-
 @Injectable()
 export class ProductsService {
 
   constructor(private prisma: PrismaService) {}
 
   create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+    return this.prisma.product.create({ 
+      data: createProductDto 
+    });
   }
   
+  featured() {
+    return this.prisma.product.findMany({
+      where: { featured: true }
+    })
+  }
+
+  topProducts() {
+    return this.prisma.product.findMany({
+      where: { top: true }
+    })
+  }
+
   findAll() {
-    return this.prisma.product.findMany( {where: {available: true} })
+    return this.prisma.product.findMany({
+      where: {available: true} 
+    })
   }
 
   findOne(id: number) {
-    return this.prisma.product.findUnique({where: {id}})
+    return this.prisma.product.findUnique({
+      where: {id}
+    })
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {

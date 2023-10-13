@@ -16,6 +16,22 @@ export class ProductsController {
     return this.productsService.create(createProductDto);
   }
 
+  @Get("/home")
+  @ApiOkResponse({type: ProductEntity})
+  async home() {
+    const featured = await this.productsService.featured()
+    const top = await this.productsService.featured()
+    const products = await this.productsService.findAll()
+    return {
+      statis: "OK",
+      data: {
+        featured: featured,
+        top: top,
+        all: products
+      }
+    }
+  }
+
   @Get()
   @ApiOkResponse({type: ProductEntity, isArray: true})
   findAll() {
